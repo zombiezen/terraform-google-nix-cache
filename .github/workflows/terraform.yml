@@ -21,6 +21,9 @@ on:
       - main
     paths:
       - "*.tf"
+      - "flake.lock"
+      - "flake.nix"
+      - ".github/workflows/terraform.yml"
 jobs:
   validate:
     name: Validate
