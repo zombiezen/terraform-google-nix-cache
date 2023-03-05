@@ -34,7 +34,7 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v3
       - name: Validate
-        run: nix develop --command terraform validate
+        run: nix develop --command bash -c 'terraform init && terraform validate'
 
 permissions:
   contents: read
