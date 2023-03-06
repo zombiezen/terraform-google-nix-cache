@@ -69,24 +69,16 @@ resource "google_storage_bucket" "cache" {
 resource "google_storage_hmac_key" "service_account" {
   count                 = var.service_account_email != "" ? 1 : 0
   service_account_email = var.service_account_email
-  project = var.service_account_project
+  project               = var.service_account_project
 
   depends_on = [
     google_project_service.storage
   ]
 }
 
-
-resource "google_storage_bucket_iam_member" "service_account_viewer" {
+resource "google_storage_bucket_iam_member" "service_account_admin" {
   count  = var.service_account_email != "" ? 1 : 0
   bucket = google_storage_bucket.cache.name
-  role   = "roles/storage.objectViewer"
-  member = "serviceAccount:${var.service_account_email}"
-}
-
-resource "google_storage_bucket_iam_member" "service_account_creator" {
-  count  = var.service_account_email != "" ? 1 : 0
-  bucket = google_storage_bucket.cache.name
-  role   = "roles/storage.objectCreator"
+  role   = "roles/storage.objectAdmin"
   member = "serviceAccount:${var.service_account_email}"
 }
