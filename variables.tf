@@ -38,3 +38,8 @@ variable "service_account_project" {
   default     = ""
   description = "(Optional) Project ID of service account to grant read and write access to, if different than google provider project"
 }
+
+variable "hmac_key" {
+  default = true
+  description = "Generate an HMAC key if a service account is created."
+}

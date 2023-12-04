@@ -67,7 +67,7 @@ resource "google_storage_bucket" "cache" {
 }
 
 resource "google_storage_hmac_key" "service_account" {
-  count                 = var.service_account_email != "" ? 1 : 0
+  count                 = var.service_account_email != "" && var.hmac_key ? 1 : 0
   service_account_email = var.service_account_email
   project               = var.service_account_project
 
@@ -79,6 +79,6 @@ resource "google_storage_hmac_key" "service_account" {
 resource "google_storage_bucket_iam_member" "service_account_admin" {
   count  = var.service_account_email != "" ? 1 : 0
   bucket = google_storage_bucket.cache.name
-  role   = "roles/storage.objectAdmin"
+  role   = "roles/storage.objectUser"
   member = "serviceAccount:${var.service_account_email}"
 }

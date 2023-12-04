@@ -23,6 +23,11 @@ output "substituter" {
   description = "Nix substituter URL"
 }
 
+output "nixcached_substituter" {
+  value       = "gs://${google_storage_bucket.cache.name}"
+  description = "nixcached substituter URL"
+}
+
 output "gcs_hmac_access_key_id" {
   value       = one(google_storage_hmac_key.service_account[*].access_id)
   description = "Access key ID for service account credentials"
