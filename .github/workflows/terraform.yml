@@ -29,10 +29,13 @@ jobs:
     name: Validate
     runs-on: ubuntu-latest
     steps:
-      - name: Install Nix
-        uses: cachix/install-nix-action@v20
       - name: Check out code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+      - name: Install Nix
+        uses: cachix/install-nix-action@v24
+        with:
+          extra_nix_config: |
+            extra-experimental-features = flakes ca-derivations impure-derivations nix-command
       - name: Validate
         run: nix develop --command bash -c 'terraform init && terraform validate'
 

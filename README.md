@@ -16,7 +16,7 @@ provider "google" {
 
 module "nix_cache" {
   source  = "zombiezen/nix-cache/google"
-  version = "0.1.0"
+  version = "0.2.1"
 
   bucket_name     = "BUCKETNAME"
   bucket_location = "us"
